@@ -30,7 +30,7 @@
 </style>
 <body>
     <div class="d-flex justify-content-center align-items-center bg-dark vh-100">
-        <form id="frmSearchUnits" class="card col-12 col-md-6 col-lg-4 bg-light">
+        <form id="frmSearchUnits" class="card col-12 col-md-10 col-lg-8 bg-light">
             <h1 class="text-center mb-0 text-primary">Select a unit</h1>
             <select id="cboUnit" class="form-control mt-4 mb-2" placeholder="Select a unit type" aria-label="Select a unit type">
                 <option value="">Select a unit type</option>
@@ -72,16 +72,20 @@
                         <option value="foot">Foot</option>
                         <option value="inch">Inch</option>
                     </select>
-                    <input id="numLength2" class="form-control mb-2" type="number" aria-label="Input for temperature"></input>
+                    <div class="card" style="background-color:White">
+                        <h6 id="txtLength" class="mb-0" style="color:black; padding:9px">--</h6>
+                    </div>
                 </div>
             </div>
+            <hr />
+            <button id="btnFindLength" class="btn btn-primary col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 mb-3" type="button">Calculate</button>
         </form>
         <form id="frmMass" class="card col-12 col-md-10 col-lg-8 bg-light" style="display:none;">
             <h1 class="text-center mt-2 mb-2 text-primary">Weight</h1>
             <hr />
             <div class="row mb-2">
                 <div class="side" style="text-align: center;">
-                    <select id="cboMass1" class="form-control mb-2" placeholder="Select a unit" aria-label="Select a unit" style="margin: auto;">
+                    <select id="cboMass1" class="form-control mb-2" placeholder="Select a unit" aria-label="Select a unit" style="margin: auto; text-align: center">
                         <option value="metric ton">Metric Ton</option>
                         <option value="kilogram">Kilogram</option>
                         <option value="gram">Gram</option>
@@ -92,13 +96,13 @@
                         <option value="pound">Pound</option>
                         <option value="ounce">Ounce</option>
                     </select>
-                    <input id="numMass1" class="form-control mb-2" type="number" aria-label="Input for temperature"></input>
+                    <input id="numMass" class="form-control mb-2" style="text-align: center" type="number" aria-label="Input for temperature"></input>
                 </div>
                 <div class="mid center">
                     <p class="text-center mb-1">to</p>
                 </div>
                 <div class="side" style="text-align: center;">
-                    <select id="cboMass2" class="form-control mb-2" placeholder="Select a unit" aria-label="Select a unit">
+                    <select id="cboMass2" class="form-control mb-2" placeholder="Select a unit" aria-label="Select a unit" style="margin: auto; text-align: center">
                         <option value="metric ton">Metric Ton</option>
                         <option value="kilogram">Kilogram</option>
                         <option value="gram">Gram</option>
@@ -109,9 +113,13 @@
                         <option value="pound">Pound</option>
                         <option value="ounce">Ounce</option>
                     </select>
-                    <input id="numMass2" class="form-control mb-2" type="number" aria-label="Input for temperature"></input>
+                    <div class="card" style="background-color:White">
+                        <h6 id="txtMass" class="mb-0" style="color:black; padding:9px">--</h6>
+                    </div>
                 </div>
-            </div>  
+            </div>
+            <hr />
+            <button id="btnFindMass" class="btn btn-primary col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 mb-3" type="button">Calculate</button>
         </form>
         <form id="frmTemperature" class="card col-12 col-md-10 col-lg-8 bg-light" style="display:none;">
             <h1 class="text-center mt-2 mb-2 text-primary">Temperature</h1>
@@ -135,7 +143,7 @@
                         <option value="kelvin">Kelvin </option>
                     </select>
                     <div class="card" style="background-color:White">
-                        <h6 id="txtTemp" class="mb-0" style="color:black; padding:10px">--</h6>
+                        <h6 id="txtTemp" class="mb-0" style="color:black; padding:9px">--</h6>
                     </div>
                 </div>
             </div>
@@ -144,7 +152,7 @@
         </form>
     </div>
 </body>
-</html>
+</html> 
 
 <script>
     document.querySelector("#btnSearchUnits").addEventListener("click",(e) => {
@@ -161,6 +169,522 @@
         if (strUnit == "temperature") {
             document.querySelector('#frmSearchUnits').style.display = 'none'
             document.querySelector('#frmTemperature').style.display = 'block'
+        }
+    })
+
+    document.querySelector("#btnFindMass").addEventListener("click",(e) => {
+        let strUnitMass1 = document.querySelector("#cboMass1").value
+        let numMass = document.querySelector("#numMass").value
+        let strUnitMass2 = document.querySelector("#cboMass2").value
+        let strMass = '<h6 class="mb-0" style="color:black;">'
+
+        if(numMass == "") {
+            numMass = 0
+        }
+
+        if(strUnitMass1 == "metric ton") {
+            if(strUnitMass2 == "metric ton"){
+                numMass = parseFloat(numMass)
+                let strMetricTon = numMass
+                strMass = strMass + strMetricTon + 't</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "kilogram") {
+                numMass = parseFloat(numMass) * 1000
+                let strMetricTon = numMass
+                strMass = strMass + strMetricTon + 'kg</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "gram") {
+                numMass = parseFloat(numMass) * 1000000
+                let strMetricTon = numMass
+                strMass = strMass + strMetricTon + 'g</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "miligram") {
+                numMass = parseFloat(numMass) * 1000000000
+                let strMetricTon = numMass
+                strMass = strMass + strMetricTon + 'mg</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "imperial ton") {
+                numMass = parseFloat(numMass) / 1.016
+                let strMetricTon = numMass.toFixed(2)
+                strMass = strMass + strMetricTon + 'LT</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "us ton") {
+                numMass = parseFloat(numMass) * 1.102
+                let strMetricTon = numMass
+                strMass = strMass + strMetricTon + 'tn</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "stone") {
+                numMass = parseFloat(numMass) * 157.5
+                let strMetricTon = numMass
+                strMass = strMass + strMetricTon + 'st</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "pound") {
+                numMass = parseFloat(numMass) * 2205
+                let strMetricTon = numMass
+                strMass = strMass + strMetricTon + 'lb</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "ounce") {
+                numMass = parseFloat(numMass) * 35270
+                let strMetricTon = numMass
+                strMass = strMass + strMetricTon + 'oz</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+        }
+        if(strUnitMass1 == "kilogram") {
+            if(strUnitMass2 == "metric ton"){
+                numMass = parseFloat(numMass) / 1000
+                let strMetricTon = numMass.toFixed(3)
+                strMass = strMass + strMetricTon + 't</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "kilogram") {
+                numMass = parseFloat(numMass)
+                let strMetricTon = numMass
+                strMass = strMass + strMetricTon + 'kg</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "gram") {
+                numMass = parseFloat(numMass) * 1000
+                let strMetricTon = numMass
+                strMass = strMass + strMetricTon + 'g</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "miligram") {
+                numMass = parseFloat(numMass) * 1000000
+                let strMetricTon = numMass
+                strMass = strMass + strMetricTon + 'mg</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "imperial ton") {
+                numMass = parseFloat(numMass) / 1016
+                let strMetricTon = numMass.toFixed(5)
+                strMass = strMass + strMetricTon + 'LT</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "us ton") {
+                numMass = parseFloat(numMass) / 907.2
+                let strMetricTon = numMass.toFixed(5)
+                strMass = strMass + strMetricTon + 'tn</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "stone") {
+                numMass = parseFloat(numMass) / 6.35
+                let strMetricTon = numMass.toFixed(2)
+                strMass = strMass + strMetricTon + 'st</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "pound") {
+                numMass = parseFloat(numMass) * 2.205
+                let strMetricTon = numMass
+                strMass = strMass + strMetricTon + 'lb</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "ounce") {
+                numMass = parseFloat(numMass) * 35.274
+                let strMetricTon = numMass
+                strMass = strMass + strMetricTon + 'lb</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+        }
+        if(strUnitMass1 == "gram") {
+            if(strUnitMass2 == "metric ton"){
+                numMass = parseFloat(numMass) / 1000000
+                let strMetricTon = numMass.toFixed(6)
+                strMass = strMass + strMetricTon + 't</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "kilogram") {
+                numMass = parseFloat(numMass) / 1000
+                let strMetricTon = numMass.toFixed(3)
+                strMass = strMass + strMetricTon + 'kg</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "gram") {
+                numMass = parseFloat(numMass)
+                let strMetricTon = numMass
+                strMass = strMass + strMetricTon + 'g</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "miligram") {
+                numMass = parseFloat(numMass) * 1000
+                let strMetricTon = numMass
+                strMass = strMass + strMetricTon + 'mg</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "imperial ton") {
+                numMass = parseFloat(numMass) / 1016000
+                let strMetricTon = numMass.toFixed(9)
+                strMass = strMass + strMetricTon + 'LT</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "us ton") {
+                numMass = parseFloat(numMass) / 907200
+                let strMetricTon = numMass.toFixed(9)
+                strMass = strMass + strMetricTon + 'tn</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "stone") {
+                numMass = parseFloat(numMass) / 6350
+                let strMetricTon = numMass.toFixed(5)
+                strMass = strMass + strMetricTon + 'st</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "pound") {
+                numMass = parseFloat(numMass) / 453.6
+                let strMetricTon = numMass.toFixed(4)
+                strMass = strMass + strMetricTon + 'lb</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "ounce") {
+                numMass = parseFloat(numMass) / 28.35
+                let strMetricTon = numMass.toFixed(3)
+                strMass = strMass + strMetricTon + 'lb</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+        }
+        if(strUnitMass1 == "miligram") {
+            if(strUnitMass2 == "metric ton"){
+                numMass = parseFloat(numMass) / 1000000000
+                let strMetricTon = numMass.toFixed(9)
+                strMass = strMass + strMetricTon + 't</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "kilogram") {
+                numMass = parseFloat(numMass) / 1000000
+                let strMetricTon = numMass.toFixed(6)
+                strMass = strMass + strMetricTon + 'kg</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "gram") {
+                numMass = parseFloat(numMass) / 1000
+                let strMetricTon = numMass.toFixed(3)
+                strMass = strMass + strMetricTon + 'g</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "miligram") {
+                numMass = parseFloat(numMass)
+                let strMetricTon = numMass
+                strMass = strMass + strMetricTon + 'mg</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "imperial ton") {
+                numMass = parseFloat(numMass) / 1016000000
+                let strMetricTon = numMass.toFixed(12)
+                strMass = strMass + strMetricTon + 'LT</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "us ton") {
+                numMass = parseFloat(numMass) / 907200
+                let strMetricTon = numMass.toFixed(9)
+                strMass = strMass + strMetricTon + 'tn</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "stone") {
+                numMass = parseFloat(numMass) / 6350000
+                let strMetricTon = numMass.toFixed(7)
+                strMass = strMass + strMetricTon + 'st</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "pound") {
+                numMass = parseFloat(numMass) / 453600
+                let strMetricTon = numMass.toFixed(6)
+                strMass = strMass + strMetricTon + 'lb</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "ounce") {
+                numMass = parseFloat(numMass) / 28350
+                let strMetricTon = numMass.toFixed(5)
+                strMass = strMass + strMetricTon + 'lb</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+        }
+        if(strUnitMass1 == "imperial ton") {
+            if(strUnitMass2 == "metric ton"){
+                numMass = parseFloat(numMass) * 1.016
+                let strMetricTon = numMass
+                strMass = strMass + strMetricTon + 't</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "kilogram") {
+                numMass = parseFloat(numMass) * 1016
+                let strMetricTon = numMass
+                strMass = strMass + strMetricTon + 'kg</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "gram") {
+                numMass = parseFloat(numMass) * 1016000
+                let strMetricTon = numMass
+                strMass = strMass + strMetricTon + 'g</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "miligram") {
+                numMass = parseFloat(numMass) * 1016000000
+                let strMetricTon = numMass
+                strMass = strMass + strMetricTon + 'mg</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "imperial ton") {
+                numMass = parseFloat(numMass)
+                let strMetricTon = numMass
+                strMass = strMass + strMetricTon + 'LT</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "us ton") {
+                numMass = parseFloat(numMass) * 1.12
+                let strMetricTon = numMass
+                strMass = strMass + strMetricTon + 'tn</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "stone") {
+                numMass = parseFloat(numMass) * 160
+                let strMetricTon = numMass
+                strMass = strMass + strMetricTon + 'st</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "pound") {
+                numMass = parseFloat(numMass) * 2240
+                let strMetricTon = numMass
+                strMass = strMass + strMetricTon + 'lb</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "ounce") {
+                numMass = parseFloat(numMass) * 35840
+                let strMetricTon = numMass
+                strMass = strMass + strMetricTon + 'oz</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+        }
+        if(strUnitMass1 == "us ton") {
+            if(strUnitMass2 == "metric ton"){
+                numMass = parseFloat(numMass) / 1.102
+                let strMetricTon = numMass.toFixed(3)
+                strMass = strMass + strMetricTon + 't</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "kilogram") {
+                numMass = parseFloat(numMass) * 907.2
+                let strMetricTon = numMass
+                strMass = strMass + strMetricTon + 'kg</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "gram") {
+                numMass = parseFloat(numMass) * 907200
+                let strMetricTon = numMass
+                strMass = strMass + strMetricTon + 'g</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "miligram") {
+                numMass = parseFloat(numMass) * 907200000
+                let strMetricTon = numMass
+                strMass = strMass + strMetricTon + 'mg</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "imperial ton") {
+                numMass = parseFloat(numMass) / 1.12
+                let strMetricTon = numMass.toFixed(2)
+                strMass = strMass + strMetricTon + 'LT</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "us ton") {
+                numMass = parseFloat(numMass)
+                let strMetricTon = numMass
+                strMass = strMass + strMetricTon + 'tn</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "stone") {
+                numMass = parseFloat(numMass) * 142.9
+                let strMetricTon = numMass
+                strMass = strMass + strMetricTon + 'st</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "pound") {
+                numMass = parseFloat(numMass) * 2000
+                let strMetricTon = numMass
+                strMass = strMass + strMetricTon + 'lb</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "ounce") {
+                numMass = parseFloat(numMass) * 32000
+                let strMetricTon = numMass
+                strMass = strMass + strMetricTon + 'oz</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+        }
+        if(strUnitMass1 == "stone") {
+            if(strUnitMass2 == "metric ton"){
+                numMass = parseFloat(numMass) / 157.5
+                let strMetricTon = numMass.toFixed(3)
+                strMass = strMass + strMetricTon + 't</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "kilogram") {
+                numMass = parseFloat(numMass) * 6.35
+                let strMetricTon = numMass
+                strMass = strMass + strMetricTon + 'kg</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "gram") {
+                numMass = parseFloat(numMass) * 6350
+                let strMetricTon = numMass
+                strMass = strMass + strMetricTon + 'g</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "miligram") {
+                numMass = parseFloat(numMass) * 6350000
+                let strMetricTon = numMass
+                strMass = strMass + strMetricTon + 'mg</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "imperial ton") {
+                numMass = parseFloat(numMass) / 160
+                let strMetricTon = numMass.toFixed(3)
+                strMass = strMass + strMetricTon + 'LT</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "us ton") {
+                numMass = parseFloat(numMass) / 142.9
+                let strMetricTon = numMass.toFixed(3)
+                strMass = strMass + strMetricTon + 'tn</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "stone") {
+                numMass = parseFloat(numMass)
+                let strMetricTon = numMass
+                strMass = strMass + strMetricTon + 'st</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "pound") {
+                numMass = parseFloat(numMass) * 14
+                let strMetricTon = numMass
+                strMass = strMass + strMetricTon + 'lb</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "ounce") {
+                numMass = parseFloat(numMass) * 224
+                let strMetricTon = numMass
+                strMass = strMass + strMetricTon + 'oz</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+        }
+        if(strUnitMass1 == "pound") {
+            if(strUnitMass2 == "metric ton"){
+                numMass = parseFloat(numMass) / 2205
+                let strMetricTon = numMass.toFixed(4)
+                strMass = strMass + strMetricTon + 't</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "kilogram") {
+                numMass = parseFloat(numMass) / 2.205
+                let strMetricTon = numMass.toFixed(3)
+                strMass = strMass + strMetricTon + 'kg</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "gram") {
+                numMass = parseFloat(numMass) * 453.6
+                let strMetricTon = numMass
+                strMass = strMass + strMetricTon + 'g</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "miligram") {
+                numMass = parseFloat(numMass) * 453600
+                let strMetricTon = numMass
+                strMass = strMass + strMetricTon + 'mg</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "imperial ton") {
+                numMass = parseFloat(numMass) / 2240
+                let strMetricTon = numMass.toFixed(4)
+                strMass = strMass + strMetricTon + 'LT</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "us ton") {
+                numMass = parseFloat(numMass) / 2000
+                let strMetricTon = numMass.toFixed(4)
+                strMass = strMass + strMetricTon + 'tn</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "stone") {
+                numMass = parseFloat(numMass) / 14
+                let strMetricTon = numMass.toFixed(3)
+                strMass = strMass + strMetricTon + 'st</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "pound") {
+                numMass = parseFloat(numMass)
+                let strMetricTon = numMass
+                strMass = strMass + strMetricTon + 'lb</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "ounce") {
+                numMass = parseFloat(numMass) * 16
+                let strMetricTon = numMass
+                strMass = strMass + strMetricTon + 'oz</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+        }
+        if(strUnitMass1 == "ounce") {
+            if(strUnitMass2 == "metric ton"){
+                numMass = parseFloat(numMass) / 35270
+                let strMetricTon = numMass.toFixed(6)
+                strMass = strMass + strMetricTon + 't</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "kilogram") {
+                numMass = parseFloat(numMass) / 35.274
+                let strMetricTon = numMass.toFixed(3)
+                strMass = strMass + strMetricTon + 'kg</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "gram") {
+                numMass = parseFloat(numMass) * 28.35
+                let strMetricTon = numMass
+                strMass = strMass + strMetricTon + 'g</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "miligram") {
+                numMass = parseFloat(numMass) * 28350
+                let strMetricTon = numMass
+                strMass = strMass + strMetricTon + 'mg</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "imperial ton") {
+                numMass = parseFloat(numMass) / 35840
+                let strMetricTon = numMass.toFixed(6)
+                strMass = strMass + strMetricTon + 'LT</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "us ton") {
+                numMass = parseFloat(numMass) / 32000
+                let strMetricTon = numMass.toFixed(6)
+                strMass = strMass + strMetricTon + 'tn</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "stone") {
+                numMass = parseFloat(numMass) / 224
+                let strMetricTon = numMass.toFixed(3)
+                strMass = strMass + strMetricTon + 'st</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "pound") {
+                numMass = parseFloat(numMass) / 16
+                let strMetricTon = numMass.toFixed(3)
+                strMass = strMass + strMetricTon + 'lb</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
+            if(strUnitMass2 == "ounce") {
+                numMass = parseFloat(numMass)
+                let strMetricTon = numMass
+                strMass = strMass + strMetricTon + 'oz</h6>'
+                document.querySelector('#txtMass').innerHTML = strMass
+            }
         }
     })
 
