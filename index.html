@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Converter</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/cerulean/bootstrap.min.css" rel="stylesheet">
+</head>
+<style>
+    .center {
+        margin: auto;
+        width: 50%;
+        padding: 10px;
+    }
+    .side {
+    padding: 10px;
+    float: left;
+    width: 47.5%;
+    }
+    .mid {
+        padding: 5px;
+        float: left;
+        width: 5%;
+    }
+    @media screen and (max-width: 500px) {
+        .side, .mid, .half {
+        width: 100%;
+        }
+    }
+</style>
+<body>
+    <div class="d-flex justify-content-center align-items-center bg-dark vh-100">
+        <form id="frmSearchUnits" class="card col-12 col-md-6 col-lg-4 bg-light">
+            <h1 class="text-center mb-0 text-primary">Select a unit</h1>
+            <select id="cboUnit" class="form-control mt-4 mb-2" placeholder="Select a unit type" aria-label="Select a unit type">
+                <option value="">Select a unit type</option>
+                <option value="length">Length</option>
+                <option value="mass">Mass</option>
+                <option value="temperature">Temperature</option>
+            </select>
+            <hr />
+            <button id="btnSearchUnits" class="btn btn-primary col-12 col-md-6 offset-md-3 col-lg-4 offset-lg-4 mt-1 mb-2" type="button">Search</button>
+        </form>
+        <form id="frmLength" class="card col-12 col-md-10 col-lg-8 bg-light" style="display:none;">
+            <h1 class="text-center mt-2 mb-2 text-primary">Length</h1>
+            <hr />
+            <div class="row mb-2">
+                <div class="side" style="text-align: center;">
+                    <select id="cboLength1" class="form-control mb-2" placeholder="Select a unit" aria-label="Select a unit" style="margin: auto;">
+                        <option value="kilometer">Kilometer</option>
+                        <option value="meter">Meter</option>
+                        <option value="centimeter">Centimeter</option>
+                        <option value="milimeter">Milimeter</option>
+                        <option value="mile">Mile</option>
+                        <option value="yard">Yard</option>
+                        <option value="foot">Foot</option>
+                        <option value="inch">Inch</option>
+                    </select>
+                    <input id="numLength1" class="form-control mb-2" type="number" aria-label="Input for temperature"></input>
+                </div>
+                <div class="mid center">
+                    <p class="text-center mb-1">to</p>
+                </div>
+                <div class="side" style="text-align: center;">
+                    <select id="cboLength2" class="form-control mb-2" placeholder="Select a unit" aria-label="Select a unit">
+                        <option value="kilometer">Kilometer</option>
+                        <option value="meter">Meter</option>
+                        <option value="centimeter">Centimeter</option>
+                        <option value="milimeter">Milimeter</option>
+                        <option value="mile">Mile</option>
+                        <option value="yard">Yard</option>
+                        <option value="foot">Foot</option>
+                        <option value="inch">Inch</option>
+                    </select>
+                    <input id="numLength2" class="form-control mb-2" type="number" aria-label="Input for temperature"></input>
+                </div>
+            </div>
+        </form>
+        <form id="frmMass" class="card col-12 col-md-10 col-lg-8 bg-light" style="display:none;">
+            <h1 class="text-center mt-2 mb-2 text-primary">Weight</h1>
+            <hr />
+            <div class="row mb-2">
+                <div class="side" style="text-align: center;">
+                    <select id="cboMass1" class="form-control mb-2" placeholder="Select a unit" aria-label="Select a unit" style="margin: auto;">
+                        <option value="metric ton">Metric Ton</option>
+                        <option value="kilogram">Kilogram</option>
+                        <option value="gram">Gram</option>
+                        <option value="miligram">Miligram</option>
+                        <option value="imperial ton">Imperial Ton</option>
+                        <option value="us ton">US Ton</option>
+                        <option value="stone">Stone</option>
+                        <option value="pound">Pound</option>
+                        <option value="ounce">Ounce</option>
+                    </select>
+                    <input id="numMass1" class="form-control mb-2" type="number" aria-label="Input for temperature"></input>
+                </div>
+                <div class="mid center">
+                    <p class="text-center mb-1">to</p>
+                </div>
+                <div class="side" style="text-align: center;">
+                    <select id="cboMass2" class="form-control mb-2" placeholder="Select a unit" aria-label="Select a unit">
+                        <option value="metric ton">Metric Ton</option>
+                        <option value="kilogram">Kilogram</option>
+                        <option value="gram">Gram</option>
+                        <option value="miligram">Miligram</option>
+                        <option value="imperial ton">Imperial Ton</option>
+                        <option value="us ton">US Ton</option>
+                        <option value="stone">Stone</option>
+                        <option value="pound">Pound</option>
+                        <option value="ounce">Ounce</option>
+                    </select>
+                    <input id="numMass2" class="form-control mb-2" type="number" aria-label="Input for temperature"></input>
+                </div>
+            </div>  
+        </form>
+        <form id="frmTemperature" class="card col-12 col-md-10 col-lg-8 bg-light" style="display:none;">
+            <h1 class="text-center mt-2 mb-2 text-primary">Temperature</h1>
+            <hr />
+            <div class="row mb-2">
+                <div class="side" style="text-align: center;">
+                    <select id="cboTemp1" class="form-control mb-2" placeholder="Select a unit" aria-label="Select a unit" style="margin: auto; text-align: center;">
+                        <option value="fahrenheit">Fahrenheit</option>
+                        <option value="celsius">Celsius</option>
+                        <option value="kelvin">Kelvin </option>
+                    </select>
+                    <input id="numTemp" class="form-control mb-1" style="text-align: center" type="number" aria-label="Input for temperature"></input>
+                </div>
+                <div class="mid center">
+                    <p class="text-center mb-1">to</p>
+                </div>
+                <div class="side" style="text-align: center;">
+                    <select id="cboTemp2" class="form-control mb-2" placeholder="Select a unit" aria-label="Select a unit" style="margin: auto; text-align: center;">
+                        <option value="fahrenheit">Fahrenheit</option>
+                        <option value="celsius">Celsius</option>
+                        <option value="kelvin">Kelvin </option>
+                    </select>
+                    <div class="card" style="background-color:White">
+                        <h6 id="txtTemp" class="mb-0" style="color:black; padding:10px">--</h6>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <button id="btnFindTemp" class="btn btn-primary col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 mb-3" type="button">Calculate</button>
+        </form>
+    </div>
+</body>
+</html>
