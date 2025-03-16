@@ -145,3 +145,94 @@
     </div>
 </body>
 </html>
+
+<script>
+    document.querySelector("#btnSearchUnits").addEventListener("click",(e) => {
+        let strUnit = document.querySelector("#cboUnit").value
+
+        if (strUnit == "length") {
+            document.querySelector('#frmSearchUnits').style.display = 'none'
+            document.querySelector('#frmLength').style.display = 'block'
+        }
+        if (strUnit == "mass") {
+            document.querySelector('#frmSearchUnits').style.display = 'none'
+            document.querySelector('#frmMass').style.display = 'block'
+        }
+        if (strUnit == "temperature") {
+            document.querySelector('#frmSearchUnits').style.display = 'none'
+            document.querySelector('#frmTemperature').style.display = 'block'
+        }
+    })
+
+    document.querySelector("#btnFindTemp").addEventListener("click",(e) => {
+        let strUnitTemp1 = document.querySelector("#cboTemp1").value
+        let numTemp = document.querySelector("#numTemp").value
+        let strUnitTemp2 = document.querySelector("#cboTemp2").value
+        let strTemp = '<h6 class="mb-0" style="color:black;">'
+
+        if(numTemp == "") {
+            numTemp = 0
+        }
+
+        if (strUnitTemp1 == "fahrenheit") {
+            if (strUnitTemp2 == "fahrenheit") {
+                numTemp = parseFloat(numTemp)
+                let strFahrenheit = numTemp.toFixed(2)
+                strTemp = strTemp + strFahrenheit + '°F</h6>'
+                document.querySelector('#txtTemp').innerHTML = strTemp
+            }
+            if (strUnitTemp2 == "celsius") {
+                numTemp = (numTemp-32) * (5/9)
+                let strCelsius = numTemp.toFixed(2)
+                strTemp = strTemp + strCelsius + '°C</h6>'
+                document.querySelector('#txtTemp').innerHTML = strTemp
+            }
+            if (strUnitTemp2 == "kelvin") {
+                numTemp = (numTemp-32) * (5/9) + 273.15
+                let strKelvin = numTemp.toFixed(2)
+                strTemp = strTemp + strKelvin + 'K</h6>'
+                document.querySelector('#txtTemp').innerHTML = strTemp
+            }
+        }
+        if (strUnitTemp1 == "celsius") {
+            if (strUnitTemp2 == "celsius") {
+                numTemp = parseFloat(numTemp)
+                let strCelsius = numTemp.toFixed(2)
+                strTemp = strTemp + strCelsius + '°C</h6>'
+                document.querySelector('#txtTemp').innerHTML = strTemp
+            }
+            if (strUnitTemp2 == "fahrenheit") {
+                numTemp = (numTemp * (9/5)) + 32 
+                let strFahrenheit = numTemp.toFixed(2)
+                strTemp = strTemp + strFahrenheit + '°F</h6>'
+                document.querySelector('#txtTemp').innerHTML = strTemp
+            }
+            if (strUnitTemp2 == "kelvin") {
+                numTemp = parseFloat(numTemp) + 273.15
+                let strKelvin = numTemp.toFixed(2)
+                strTemp = strTemp + strKelvin + 'K</h6>'
+                document.querySelector('#txtTemp').innerHTML = strTemp
+            }
+        }
+        if (strUnitTemp1 == "kelvin") {
+            if (strUnitTemp2 == "kelvin") {
+                numTemp = parseFloat(numTemp)
+                let strKelvin = numTemp.toFixed(2)
+                strTemp = strTemp + strKelvin + 'K</h6>'
+                document.querySelector('#txtTemp').innerHTML = strTemp
+            }
+            if (strUnitTemp2 == "fahrenheit") {
+                numTemp = (numTemp - 273.15) * (9/5) + 32 
+                let strFahrenheit = numTemp.toFixed(2)
+                strTemp = strTemp + strFahrenheit + '°F</h6>'
+                document.querySelector('#txtTemp').innerHTML = strTemp
+            }
+            if (strUnitTemp2 == "celsius") {
+                numTemp = parseFloat(numTemp) - 273.15
+                let strKelvin = numTemp.toFixed(2)
+                strTemp = strTemp + strKelvin + '°C</h6>'
+                document.querySelector('#txtTemp').innerHTML = strTemp
+            }
+        }
+    })
+</script>
