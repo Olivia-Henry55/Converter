@@ -32,7 +32,7 @@
     <div class="d-flex justify-content-center align-items-center bg-dark vh-100">
         <form id="frmSearchUnits" class="card col-12 col-md-10 col-lg-8 bg-light">
             <h1 class="text-center mb-0 text-primary">Select a unit</h1>
-            <select id="cboUnit" class="form-control mt-4 mb-2" placeholder="Select a unit type" aria-label="Select a unit type">
+            <select id="cboUnit" class="form-control mt-4 mb-2" placeholder="Select a unit type" style="text-align: center; color:black;" aria-label="Select a unit type">
                 <option value="">Select a unit type</option>
                 <option value="length">Length</option>
                 <option value="mass">Mass</option>
@@ -46,7 +46,7 @@
             <hr />
             <div class="row mb-2">
                 <div class="side" style="text-align: center;">
-                    <select id="cboLength1" class="form-control mb-2" placeholder="Select a unit" aria-label="Select a unit" style="margin: auto;">
+                    <select id="cboLength1" class="form-control mb-2" placeholder="Select a unit" aria-label="Select a unit" style="margin: auto; text-align: center; color:black;">
                         <option value="kilometer">Kilometer</option>
                         <option value="meter">Meter</option>
                         <option value="centimeter">Centimeter</option>
@@ -56,13 +56,13 @@
                         <option value="foot">Foot</option>
                         <option value="inch">Inch</option>
                     </select>
-                    <input id="numLength1" class="form-control mb-2" type="number" aria-label="Input for temperature"></input>
+                    <input id="numLength" class="form-control mb-2" style="margin: auto; text-align: center; color:black;" type="number" aria-label="Input for temperature"></input>
                 </div>
                 <div class="mid center">
                     <p class="text-center mb-1">to</p>
                 </div>
                 <div class="side" style="text-align: center;">
-                    <select id="cboLength2" class="form-control mb-2" placeholder="Select a unit" aria-label="Select a unit">
+                    <select id="cboLength2" class="form-control mb-2"  placeholder="Select a unit" aria-label="Select a unit" style="margin: auto; text-align: center; color:black;">
                         <option value="kilometer">Kilometer</option>
                         <option value="meter">Meter</option>
                         <option value="centimeter">Centimeter</option>
@@ -85,7 +85,7 @@
             <hr />
             <div class="row mb-2">
                 <div class="side" style="text-align: center;">
-                    <select id="cboMass1" class="form-control mb-2" placeholder="Select a unit" aria-label="Select a unit" style="margin: auto; text-align: center">
+                    <select id="cboMass1" class="form-control mb-2" placeholder="Select a unit" aria-label="Select a unit" style="margin: auto; text-align: center; color:black;">
                         <option value="metric ton">Metric Ton</option>
                         <option value="kilogram">Kilogram</option>
                         <option value="gram">Gram</option>
@@ -96,13 +96,13 @@
                         <option value="pound">Pound</option>
                         <option value="ounce">Ounce</option>
                     </select>
-                    <input id="numMass" class="form-control mb-2" style="text-align: center" type="number" aria-label="Input for temperature"></input>
+                    <input id="numMass" class="form-control mb-2" style="text-align: center; color:black;" type="number" aria-label="Input for temperature"></input>
                 </div>
                 <div class="mid center">
                     <p class="text-center mb-1">to</p>
                 </div>
                 <div class="side" style="text-align: center;">
-                    <select id="cboMass2" class="form-control mb-2" placeholder="Select a unit" aria-label="Select a unit" style="margin: auto; text-align: center">
+                    <select id="cboMass2" class="form-control mb-2" placeholder="Select a unit" aria-label="Select a unit" style="margin: auto; text-align: center; color:black;">
                         <option value="metric ton">Metric Ton</option>
                         <option value="kilogram">Kilogram</option>
                         <option value="gram">Gram</option>
@@ -126,18 +126,18 @@
             <hr />
             <div class="row mb-2">
                 <div class="side" style="text-align: center;">
-                    <select id="cboTemp1" class="form-control mb-2" placeholder="Select a unit" aria-label="Select a unit" style="margin: auto; text-align: center;">
+                    <select id="cboTemp1" class="form-control mb-2" placeholder="Select a unit" aria-label="Select a unit" style="margin: auto; text-align: center; color:black;">
                         <option value="fahrenheit">Fahrenheit</option>
                         <option value="celsius">Celsius</option>
                         <option value="kelvin">Kelvin </option>
                     </select>
-                    <input id="numTemp" class="form-control mb-1" style="text-align: center" type="number" aria-label="Input for temperature"></input>
+                    <input id="numTemp" class="form-control mb-1" style="text-align: center; color:black;" type="number" aria-label="Input for temperature"></input>
                 </div>
                 <div class="mid center">
                     <p class="text-center mb-1">to</p>
                 </div>
                 <div class="side" style="text-align: center;">
-                    <select id="cboTemp2" class="form-control mb-2" placeholder="Select a unit" aria-label="Select a unit" style="margin: auto; text-align: center;">
+                    <select id="cboTemp2" class="form-control mb-2" placeholder="Select a unit" aria-label="Select a unit" style="margin: auto; text-align: center; color:black;">
                         <option value="fahrenheit">Fahrenheit</option>
                         <option value="celsius">Celsius</option>
                         <option value="kelvin">Kelvin </option>
@@ -169,6 +169,419 @@
         if (strUnit == "temperature") {
             document.querySelector('#frmSearchUnits').style.display = 'none'
             document.querySelector('#frmTemperature').style.display = 'block'
+        }
+    })
+
+    document.querySelector("#btnFindLength").addEventListener("click",(e) => {
+        let strUnitLength1 = document.querySelector("#cboLength1").value
+        let numLength = document.querySelector("#numLength").value
+        let strUnitLength2 = document.querySelector("#cboLength2").value
+        let strLength = '<h6 class="mb-0" style="color:black;">'
+
+        if(numLength == "") {
+            numLength = 0
+        }
+
+        if(strUnitLength1 == "kilometer") {
+            if(strUnitLength2 == "kilometer"){
+                numLength = parseFloat(numLength)
+                let strKilometer = numLength
+                strLength = strLength + strKilometer + 'km</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "meter"){
+                numLength = parseFloat(numLength) * 1000
+                let strKilometer = numLength
+                strLength = strLength + strKilometer + 'm</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "centimeter"){
+                numLength = parseFloat(numLength) * 100000
+                let strKilometer = numLength
+                strLength = strLength + strKilometer + 'cm</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "milimeter"){
+                numLength = parseFloat(numLength) * 1000000
+                let strKilometer = numLength
+                strLength = strLength + strKilometer + 'mm</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "mile"){
+                numLength = parseFloat(numLength) / 1.609
+                let strKilometer = numLength.toFixed(3)
+                strLength = strLength + strKilometer + 'mi</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "yard"){
+                numLength = parseFloat(numLength) * 1094
+                let strKilometer = numLength
+                strLength = strLength + strKilometer + 'yd</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "foot"){
+                numLength = parseFloat(numLength) * 3281
+                let strKilometer = numLength
+                strLength = strLength + strKilometer + 'ft</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "inch"){
+                numLength = parseFloat(numLength) * 39370
+                let strKilometer = numLength
+                strLength = strLength + strKilometer + 'in</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+        }
+        if(strUnitLength1 == "meter") {
+            if(strUnitLength2 == "kilometer"){
+                numLength = parseFloat(numLength) / 1000
+                let strKilometer = numLength.toFixed(3)
+                strLength = strLength + strKilometer + 'km</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "meter"){
+                numLength = parseFloat(numLength)
+                let strKilometer = numLength
+                strLength = strLength + strKilometer + 'm</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "centimeter"){
+                numLength = parseFloat(numLength) * 100
+                let strKilometer = numLength
+                strLength = strLength + strKilometer + 'cm</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "milimeter"){
+                numLength = parseFloat(numLength) * 1000
+                let strKilometer = numLength
+                strLength = strLength + strKilometer + 'mm</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "mile"){
+                numLength = parseFloat(numLength) / 1609
+                let strKilometer = numLength.toFixed(4)
+                strLength = strLength + strKilometer + 'mi</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "yard"){
+                numLength = parseFloat(numLength) * 1.094
+                let strKilometer = numLength
+                strLength = strLength + strKilometer + 'yd</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "foot"){
+                numLength = parseFloat(numLength) * 3.281
+                let strKilometer = numLength
+                strLength = strLength + strKilometer + 'ft</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "inch"){
+                numLength = parseFloat(numLength) * 39.37
+                let strKilometer = numLength
+                strLength = strLength + strKilometer + 'in</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+        }
+        if(strUnitLength1 == "centimeter") {
+            if(strUnitLength2 == "kilometer"){
+                numLength = parseFloat(numLength) / 100000
+                let strKilometer = numLength.toFixed(5)
+                strLength = strLength + strKilometer + 'km</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "meter"){
+                numLength = parseFloat(numLength) / 100
+                let strKilometer = numLength.toFixed(2)
+                strLength = strLength + strKilometer + 'm</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "centimeter"){
+                numLength = parseFloat(numLength)
+                let strKilometer = numLength
+                strLength = strLength + strKilometer + 'cm</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "milimeter"){
+                numLength = parseFloat(numLength) * 10
+                let strKilometer = numLength
+                strLength = strLength + strKilometer + 'mm</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "mile"){
+                numLength = parseFloat(numLength) / 160900
+                let strKilometer = numLength.toFixed(7)
+                strLength = strLength + strKilometer + 'mi</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "yard"){
+                numLength = parseFloat(numLength) / 91.44
+                console.log(numLength)
+                let strKilometer = numLength.toFixed(3)
+                strLength = strLength + strKilometer + 'yd</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "foot"){
+                numLength = parseFloat(numLength) / 30.48
+                let strKilometer = numLength.toFixed(3)
+                strLength = strLength + strKilometer + 'ft</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "inch"){
+                numLength = parseFloat(numLength) / 2.54
+                let strKilometer = numLength.toFixed(2)
+                strLength = strLength + strKilometer + 'in</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+        }
+        if(strUnitLength1 == "milimeter") {
+            if(strUnitLength2 == "kilometer"){
+                numLength = parseFloat(numLength) / 1000000
+                let strKilometer = numLength.toFixed(6)
+                strLength = strLength + strKilometer + 'km</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "meter"){
+                numLength = parseFloat(numLength) / 1000
+                let strKilometer = numLength.toFixed(3)
+                strLength = strLength + strKilometer + 'm</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "centimeter"){
+                numLength = parseFloat(numLength) / 10
+                let strKilometer = numLength.toFixed(1)
+                strLength = strLength + strKilometer + 'cm</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "milimeter"){
+                numLength = parseFloat(numLength)
+                let strKilometer = numLength
+                strLength = strLength + strKilometer + 'mm</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "mile"){
+                numLength = parseFloat(numLength) / 1609000
+                let strKilometer = numLength.toFixed(8)
+                strLength = strLength + strKilometer + 'mi</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "yard"){
+                numLength = parseFloat(numLength) / 914.4
+                let strKilometer = numLength.toFixed(4)
+                strLength = strLength + strKilometer + 'yd</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "foot"){
+                numLength = parseFloat(numLength) / 304.8
+                let strKilometer = numLength.toFixed(4)
+                strLength = strLength + strKilometer + 'ft</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "inch"){
+                numLength = parseFloat(numLength) / 25.4
+                let strKilometer = numLength.toFixed(3)
+                strLength = strLength + strKilometer + 'in</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+        }
+        if(strUnitLength1 == "mile") {
+            if(strUnitLength2 == "kilometer"){
+                numLength = parseFloat(numLength) * 1.609
+                let strKilometer = numLength
+                strLength = strLength + strKilometer + 'km</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "meter"){
+                numLength = parseFloat(numLength) * 1609
+                let strKilometer = numLength
+                strLength = strLength + strKilometer + 'm</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "centimeter"){
+                numLength = parseFloat(numLength) * 160900
+                let strKilometer = numLength
+                strLength = strLength + strKilometer + 'cm</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "milimeter"){
+                numLength = parseFloat(numLength) * 1609000
+                let strKilometer = numLength
+                strLength = strLength + strKilometer + 'mm</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "mile"){
+                numLength = parseFloat(numLength)
+                let strKilometer = numLength
+                strLength = strLength + strKilometer + 'mi</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "yard"){
+                numLength = parseFloat(numLength) * 1760
+                let strKilometer = numLength
+                strLength = strLength + strKilometer + 'yd</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "foot"){
+                numLength = parseFloat(numLength) * 5280
+                let strKilometer = numLength
+                strLength = strLength + strKilometer + 'ft</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "inch"){
+                numLength = parseFloat(numLength) * 63360
+                let strKilometer = numLength
+                strLength = strLength + strKilometer + 'in</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+        }
+        if(strUnitLength1 == "yard") {
+            if(strUnitLength2 == "kilometer"){
+                numLength = parseFloat(numLength) / 1094
+                let strKilometer = numLength.toFixed(4)
+                strLength = strLength + strKilometer + 'km</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "meter"){
+                numLength = parseFloat(numLength) / 1.094
+                let strKilometer = numLength.toFixed(2)
+                strLength = strLength + strKilometer + 'm</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "centimeter"){
+                numLength = parseFloat(numLength) * 91.44
+                let strKilometer = numLength
+                strLength = strLength + strKilometer + 'cm</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "milimeter"){
+                numLength = parseFloat(numLength) * 914.4
+                let strKilometer = numLength
+                strLength = strLength + strKilometer + 'mm</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "mile"){
+                numLength = parseFloat(numLength) / 1760
+                let strKilometer = numLength.toFixed(4)
+                strLength = strLength + strKilometer + 'mi</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "yard"){
+                numLength = parseFloat(numLength)
+                let strKilometer = numLength
+                strLength = strLength + strKilometer + 'yd</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "foot"){
+                numLength = parseFloat(numLength) * 3
+                let strKilometer = numLength
+                strLength = strLength + strKilometer + 'ft</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "inch"){
+                numLength = parseFloat(numLength) * 36
+                let strKilometer = numLength
+                strLength = strLength + strKilometer + 'in</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+        }
+        if(strUnitLength1 == "foot") {
+            if(strUnitLength2 == "kilometer"){
+                numLength = parseFloat(numLength) / 3281
+                let strKilometer = numLength.toFixed(4)
+                strLength = strLength + strKilometer + 'km</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "meter"){
+                numLength = parseFloat(numLength) / 3.281
+                let strKilometer = numLength.toFixed(2)
+                strLength = strLength + strKilometer + 'm</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "centimeter"){
+                numLength = parseFloat(numLength) * 30.48
+                let strKilometer = numLength
+                strLength = strLength + strKilometer + 'cm</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "milimeter"){
+                numLength = parseFloat(numLength) * 304.8
+                let strKilometer = numLength
+                strLength = strLength + strKilometer + 'mm</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "mile"){
+                numLength = parseFloat(numLength) / 5280
+                let strKilometer = numLength.toFixed(4)
+                strLength = strLength + strKilometer + 'mi</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "yard"){
+                numLength = parseFloat(numLength) / 3
+                let strKilometer = numLength.toFixed(2)
+                strLength = strLength + strKilometer + 'yd</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "foot"){
+                numLength = parseFloat(numLength)
+                let strKilometer = numLength
+                strLength = strLength + strKilometer + 'ft</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "inch"){
+                numLength = parseFloat(numLength) * 12
+                let strKilometer = numLength
+                strLength = strLength + strKilometer + 'in</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+        }
+        if(strUnitLength1 == "inch") {
+            if(strUnitLength2 == "kilometer"){
+                numLength = parseFloat(numLength) / 39370
+                let strKilometer = numLength.toFixed(6)
+                strLength = strLength + strKilometer + 'km</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "meter"){
+                numLength = parseFloat(numLength) / 39.37
+                let strKilometer = numLength.toFixed(2)
+                strLength = strLength + strKilometer + 'm</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "centimeter"){
+                numLength = parseFloat(numLength) * 2.54
+                let strKilometer = numLength
+                strLength = strLength + strKilometer + 'cm</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "milimeter"){
+                numLength = parseFloat(numLength) * 25.4
+                let strKilometer = numLength
+                strLength = strLength + strKilometer + 'mm</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "mile"){
+                numLength = parseFloat(numLength) / 63360
+                let strKilometer = numLength.toFixed(6)
+                strLength = strLength + strKilometer + 'mi</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "yard"){
+                numLength = parseFloat(numLength) / 36
+                let strKilometer = numLength.toFixed(3)
+                strLength = strLength + strKilometer + 'yd</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "foot"){
+                numLength = parseFloat(numLength) / 12
+                let strKilometer = numLength.toFixed(3)
+                strLength = strLength + strKilometer + 'ft</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
+            if(strUnitLength2 == "inch"){
+                numLength = parseFloat(numLength)
+                let strKilometer = numLength
+                strLength = strLength + strKilometer + 'in</h6>'
+                document.querySelector('#txtLength').innerHTML = strLength
+            }
         }
     })
 
