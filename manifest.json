@@ -1,8 +1,8 @@
 {
     "name": "Conversion App",
-    "short_name": "Conversion",
-    "start_url": "/Conversion",
-    "id": "/Conversion",
+    "short_name": "Converter",
+    "start_url": "/Converter",
+    "id": "/Converter",
     "display": "standalone",
     "icons": [
         {
